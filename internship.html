@@ -28,7 +28,6 @@
       padding: 0 20px;
     }
 
-    /* Header & Logo Support */
     header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
@@ -79,7 +78,6 @@
       color: #2563eb;
     }
 
-    /* Main Card */
     main {
       padding: 40px 0 60px;
     }
@@ -115,7 +113,6 @@
       margin-bottom: 28px;
     }
 
-    /* Form Grid */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -175,7 +172,6 @@
       cursor: not-allowed;
     }
 
-    /* Status Alert */
     .status-box {
       display: none;
       margin-top: 18px;
@@ -223,7 +219,6 @@
   <header>
     <div class="nav-bar">
       <a href="index.html" class="brand">
-        <!-- Place your logo file as logo.png (or logo.svg) in the same folder -->
         <img
           src="logo.png"
           alt="COC Nine Solutions Logo"
@@ -332,21 +327,24 @@
       submitBtn.textContent = "Submitting...";
       statusMsg.className = "status-box";
 
-      const formData = new URLSearchParams();
-      formData.append("fullName", document.getElementById("fullName").value.trim());
-      formData.append("email", document.getElementById("email").value.trim());
-      formData.append("phone", document.getElementById("phone").value.trim());
-      formData.append("college", document.getElementById("college").value.trim());
-      formData.append("branchYear", document.getElementById("branchYear").value.trim());
-      formData.append("domain", document.getElementById("domain").value);
-      formData.append("duration", document.getElementById("duration").value);
-      formData.append("resumeLink", document.getElementById("resumeLink").value.trim() || "N/A");
+      const params = new URLSearchParams();
+      params.append("fullName", document.getElementById("fullName").value.trim());
+      params.append("email", document.getElementById("email").value.trim());
+      params.append("phone", document.getElementById("phone").value.trim());
+      params.append("college", document.getElementById("college").value.trim());
+      params.append("branchYear", document.getElementById("branchYear").value.trim());
+      params.append("domain", document.getElementById("domain").value);
+      params.append("duration", document.getElementById("duration").value);
+      params.append("resumeLink", document.getElementById("resumeLink").value.trim() || "N/A");
 
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
-          body: formData
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+          body: params.toString()
         });
 
         statusMsg.className = "status-box status-success";
