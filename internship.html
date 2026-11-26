@@ -28,6 +28,7 @@
       padding: 0 20px;
     }
 
+    /* Header & Logo Support */
     header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
@@ -78,6 +79,7 @@
       color: #2563eb;
     }
 
+    /* Main Card */
     main {
       padding: 40px 0 60px;
     }
@@ -113,6 +115,7 @@
       margin-bottom: 28px;
     }
 
+    /* Form Grid */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -172,6 +175,7 @@
       cursor: not-allowed;
     }
 
+    /* Status Alert */
     .status-box {
       display: none;
       margin-top: 18px;
@@ -242,9 +246,14 @@
       <div class="card">
         <span class="badge">2026–27 Internship Program</span>
         <h1>Internship Registration</h1>
-        <p class="subtitle">Apply for hands-on EdTech, Software Engineering & Rust/Edge internships at COC Nine Solutions Private Limited (Kadapa, AP).</p>
+        <p class="subtitle">Apply for hands-on EdTech, Software Engineering &amp; Rust/Edge internships at COC Nine Solutions Private Limited (Kadapa, AP).</p>
 
-        <form id="internshipForm">
+        <form
+          id="internshipForm"
+          action="https://script.google.com/macros/s/AKfycbzsTmC3EObujKwqs7yRVixKzJXtfnPpLn0yOH042HOh7eF6sVL8bgHkk7jqX3M3AIvQ/exec"
+          method="POST"
+          target="hidden_iframe"
+        >
           <div class="form-grid">
             <div>
               <label for="fullName">Full Name *</label>
@@ -267,7 +276,7 @@
             </div>
 
             <div>
-              <label for="branchYear">Branch & Current Year *</label>
+              <label for="branchYear">Branch &amp; Current Year *</label>
               <input type="text" id="branchYear" name="branchYear" placeholder="e.g. CSE / ECE - 3rd Year" required />
             </div>
 
@@ -286,13 +295,13 @@
               <label for="domain">Internship Domain *</label>
               <select id="domain" name="domain" required>
                 <option value="">Choose a domain</option>
-                <option value="Embedded Systems & Rust Programming">Embedded Systems & Rust Programming</option>
-                <option value="IoT & Edge Computing with Rust">IoT & Edge Computing with Rust</option>
+                <option value="Embedded Systems & Rust Programming">Embedded Systems &amp; Rust Programming</option>
+                <option value="IoT & Edge Computing with Rust">IoT &amp; Edge Computing with Rust</option>
                 <option value="Full Stack Web Development">Full Stack Web Development</option>
-                <option value="Software Testing & QA Automation">Software Testing & QA Automation</option>
-                <option value="EdTech Product & Content Engineering">EdTech Product & Content Engineering</option>
-                <option value="Python & Backend Development">Python & Backend Development</option>
-                <option value="UI/UX & Graphic Design">UI/UX & Graphic Design</option>
+                <option value="Software Testing & QA Automation">Software Testing &amp; QA Automation</option>
+                <option value="EdTech Product & Content Engineering">EdTech Product &amp; Content Engineering</option>
+                <option value="Python & Backend Development">Python &amp; Backend Development</option>
+                <option value="UI/UX & Graphic Design">UI/UX &amp; Graphic Design</option>
               </select>
             </div>
 
@@ -305,6 +314,8 @@
           <button type="submit" id="submitBtn">Submit Registration</button>
           <div id="statusMsg" class="status-box"></div>
         </form>
+
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
       </div>
     </div>
   </main>
@@ -314,49 +325,34 @@
   </footer>
 
   <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1_xSnSoda9MlA5X_UqX69TpzzW67W4J1RzjmjoXaI_EyYs1YDtOnf_WPceB73u3nm/exec";
-
     const form = document.getElementById("internshipForm");
     const submitBtn = document.getElementById("submitBtn");
     const statusMsg = document.getElementById("statusMsg");
+    const iframe = document.getElementById("hidden_iframe");
+    let isSubmitting = false;
+    let fallbackTimer = null;
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    function completeSubmission() {
+      if (!isSubmitting) return;
+      isSubmitting = false;
+      clearTimeout(fallbackTimer);
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit Registration";
+      statusMsg.className = "status-box status-success";
+      statusMsg.textContent = "Registration submitted successfully! Our team at COC Nine Solutions will contact you soon.";
+      form.reset();
+    }
 
+    form.addEventListener("submit", () => {
+      isSubmitting = true;
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting...";
       statusMsg.className = "status-box";
+      fallbackTimer = setTimeout(completeSubmission, 4000);
+    });
 
-      const params = new URLSearchParams();
-      params.append("fullName", document.getElementById("fullName").value.trim());
-      params.append("email", document.getElementById("email").value.trim());
-      params.append("phone", document.getElementById("phone").value.trim());
-      params.append("college", document.getElementById("college").value.trim());
-      params.append("branchYear", document.getElementById("branchYear").value.trim());
-      params.append("domain", document.getElementById("domain").value);
-      params.append("duration", document.getElementById("duration").value);
-      params.append("resumeLink", document.getElementById("resumeLink").value.trim() || "N/A");
-
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-          },
-          body: params.toString()
-        });
-
-        statusMsg.className = "status-box status-success";
-        statusMsg.textContent = "Registration submitted successfully! Our team at COC Nine Solutions will contact you soon.";
-        form.reset();
-      } catch (error) {
-        statusMsg.className = "status-box status-error";
-        statusMsg.textContent = "Something went wrong. Please try again or call +91 94917 00443.";
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit Registration";
-      }
+    iframe.addEventListener("load", () => {
+      completeSubmission();
     });
   </script>
 
