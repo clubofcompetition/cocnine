@@ -28,11 +28,11 @@
       padding: 0 20px;
     }
 
-    /* Header */
+    /* Header & Logo Support */
     header {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
-      padding: 16px 0;
+      padding: 14px 0;
     }
 
     .nav-bar {
@@ -42,13 +42,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-weight: 700;
       font-size: 16px;
       color: #0f172a;
       text-decoration: none;
+    }
+
+    .brand-logo {
+      height: 36px;
+      width: auto;
+      max-width: 150px;
+      object-fit: contain;
+      display: block;
     }
 
     .brand span {
@@ -60,6 +72,7 @@
       color: #475569;
       text-decoration: none;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     .back-link:hover {
@@ -209,7 +222,22 @@
 
   <header>
     <div class="nav-bar">
-      <a href="index.html" class="brand">COC <span>Nine</span> Solutions</a>
+      <a href="index.html" class="brand">
+        <!-- Place your logo file as logo.png (or logo.svg) in the same folder -->
+        <img
+          src="logo.png"
+          alt="COC Nine Solutions Logo"
+          class="brand-logo"
+          onerror="this.style.display='none'; document.getElementById('fallbackSvg').style.display='inline-flex';"
+        />
+        <span id="fallbackSvg" style="display:none; align-items:center;" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="#2563EB"/>
+            <path d="M9 16.5L14 21.5L23 11.5" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>COC <span>Nine</span> Solutions</span>
+      </a>
       <a href="tel:+919491700443" class="back-link">Help: +91 94917 00443</a>
     </div>
   </header>
@@ -219,7 +247,7 @@
       <div class="card">
         <span class="badge">2026–27 Internship Program</span>
         <h1>Internship Registration</h1>
-        <p class="subtitle">Apply for hands-on EdTech & Software Engineering internships at COC Nine Solutions Private Limited (Kadapa, AP).</p>
+        <p class="subtitle">Apply for hands-on EdTech, Software Engineering & Rust/Edge internships at COC Nine Solutions Private Limited (Kadapa, AP).</p>
 
         <form id="internshipForm">
           <div class="form-grid">
@@ -304,23 +332,21 @@
       submitBtn.textContent = "Submitting...";
       statusMsg.className = "status-box";
 
-      const payload = {
-        fullName: document.getElementById("fullName").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        college: document.getElementById("college").value.trim(),
-        branchYear: document.getElementById("branchYear").value.trim(),
-        domain: document.getElementById("domain").value,
-        duration: document.getElementById("duration").value,
-        resumeLink: document.getElementById("resumeLink").value.trim() || "N/A"
-      };
+      const formData = new URLSearchParams();
+      formData.append("fullName", document.getElementById("fullName").value.trim());
+      formData.append("email", document.getElementById("email").value.trim());
+      formData.append("phone", document.getElementById("phone").value.trim());
+      formData.append("college", document.getElementById("college").value.trim());
+      formData.append("branchYear", document.getElementById("branchYear").value.trim());
+      formData.append("domain", document.getElementById("domain").value);
+      formData.append("duration", document.getElementById("duration").value);
+      formData.append("resumeLink", document.getElementById("resumeLink").value.trim() || "N/A");
 
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: formData
         });
 
         statusMsg.className = "status-box status-success";
