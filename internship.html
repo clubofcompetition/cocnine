@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship Registration | COC Nine Solutions Private Limited</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 0;
+    }
+
+    .nav-bar {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 16px;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: #2563eb;
+    }
+
+    .back-link {
+      font-size: 14px;
+      color: #475569;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-link:hover {
+      color: #2563eb;
+    }
+
+    /* Main Card */
+    main {
+      padding: 40px 0 60px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 28px;
+    }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #0f172a;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus {
+      border-color: #2563eb;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      color: #ffffff;
+      background: #2563eb;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    /* Status Alert */
+    .status-box {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .status-success {
+      display: block;
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .status-error {
+      display: block;
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-bar">
+      <a href="index.html" class="brand">COC <span>Nine</span> Solutions</a>
+      <a href="tel:+919491700443" class="back-link">Help: +91 94917 00443</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <span class="badge">2026–27 Internship Program</span>
+        <h1>Internship Registration</h1>
+        <p class="subtitle">Apply for hands-on EdTech & Software Engineering internships at COC Nine Solutions Private Limited (Kadapa, AP).</p>
+
+        <form id="internshipForm">
+          <div class="form-grid">
+            <div>
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Vishnu Vardhan" required />
+            </div>
+
+            <div>
+              <label for="phone">Phone / WhatsApp Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" required />
+            </div>
+
+            <div class="full-width">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+
+            <div class="full-width">
+              <label for="college">College / University Name *</label>
+              <input type="text" id="college" name="college" placeholder="Enter your institution name" required />
+            </div>
+
+            <div>
+              <label for="branchYear">Branch & Current Year *</label>
+              <input type="text" id="branchYear" name="branchYear" placeholder="e.g. CSE / ECE - 3rd Year" required />
+            </div>
+
+            <div>
+              <label for="duration">Preferred Duration *</label>
+              <select id="duration" name="duration" required>
+                <option value="">Select duration</option>
+                <option value="1 Month">1 Month</option>
+                <option value="2 Months">2 Months</option>
+                <option value="3 Months">3 Months</option>
+                <option value="6 Months">6 Months</option>
+              </select>
+            </div>
+
+            <div class="full-width">
+              <label for="domain">Internship Domain *</label>
+              <select id="domain" name="domain" required>
+                <option value="">Choose a domain</option>
+                <option value="Embedded Systems & Rust Programming">Embedded Systems & Rust Programming</option>
+                <option value="IoT & Edge Computing with Rust">IoT & Edge Computing with Rust</option>
+                <option value="Full Stack Web Development">Full Stack Web Development</option>
+                <option value="Software Testing & QA Automation">Software Testing & QA Automation</option>
+                <option value="EdTech Product & Content Engineering">EdTech Product & Content Engineering</option>
+                <option value="Python & Backend Development">Python & Backend Development</option>
+                <option value="UI/UX & Graphic Design">UI/UX & Graphic Design</option>
+              </select>
+            </div>
+
+            <div class="full-width">
+              <label for="resumeLink">Resume / GitHub / LinkedIn URL (Optional)</label>
+              <input type="url" id="resumeLink" name="resumeLink" placeholder="https://drive.google.com/..." />
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn">Submit Registration</button>
+          <div id="statusMsg" class="status-box"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 COC Nine Solutions Private Limited · CIN: U85500AP2026PTC123763 · Kadapa, Andhra Pradesh
+  </footer>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1_xSnSoda9MlA5X_UqX69TpzzW67W4J1RzjmjoXaI_EyYs1YDtOnf_WPceB73u3nm/exec";
+
+    const form = document.getElementById("internshipForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusMsg = document.getElementById("statusMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+      statusMsg.className = "status-box";
+
+      const payload = {
+        fullName: document.getElementById("fullName").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        college: document.getElementById("college").value.trim(),
+        branchYear: document.getElementById("branchYear").value.trim(),
+        domain: document.getElementById("domain").value,
+        duration: document.getElementById("duration").value,
+        resumeLink: document.getElementById("resumeLink").value.trim() || "N/A"
+      };
+
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        statusMsg.className = "status-box status-success";
+        statusMsg.textContent = "Registration submitted successfully! Our team at COC Nine Solutions will contact you soon.";
+        form.reset();
+      } catch (error) {
+        statusMsg.className = "status-box status-error";
+        statusMsg.textContent = "Something went wrong. Please try again or call +91 94917 00443.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Registration";
+      }
+    });
+  </script>
+
+</body>
+</html>
